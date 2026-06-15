@@ -1,0 +1,32 @@
+import random
+import string
+
+def generate_password(length=12):
+    # Наборы символов
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    digits = string.digits
+    symbols = "!@#$%^&*"
+
+    # Объединяем все символы
+    all_chars = lower + upper + digits + symbols
+
+    # Гарантируем хотя бы один символ из каждой группы
+    password = [
+        random.choice(lower),
+        random.choice(upper),
+        random.choice(digits),
+        random.choice(symbols),
+    ]
+
+    # Добавляем остальные символы случайно
+    password += random.choices(all_chars, k=length-4)
+
+    # Перемешиваем
+    random.shuffle(password)
+
+    return ''.join(password)
+
+# Генерация и вывод
+pwd = generate_password(12)
+print(f"Ваш пароль: {pwd}")
